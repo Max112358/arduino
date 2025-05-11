@@ -86,8 +86,8 @@ void loop() {
     // Click position 2 once
     Mouse.click(MOUSE_LEFT);
     
-    // Wait for 65 seconds
-    delay(65000);
+    // Wait for 30 seconds
+    delay(30000);
   }
   
   // Small delay in the main loop
