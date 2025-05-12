@@ -1,5 +1,15 @@
 #include <Mouse.h>
 
+//make sure you install the sparkfun libraries
+//Install Pro Micro Support:
+//Open Arduino IDE → File → Preferences
+//In Additional Boards Manager URLs, add:
+//https://raw.githubusercontent.com/sparkfun/Arduino_Boards/main/IDE_Board_Manager/package_sparkfun_index.json
+//Go to Tools → Board → Boards Manager, search for "SparkFun AVR Boards", and install it.
+//Select the Board:
+//Tools → Board → SparkFun Pro Micro
+//Processor: ATmega32U4 (5V, 16MHz)
+
 const int buttonPin = 3;    // Using D3 for the button (this is also INT1 on Arduino Leonardo/Micro)
 volatile boolean mouseActive = false; // whether the sequence is active
 unsigned long lastDebounceTime = 0;  // for debouncing
@@ -100,9 +110,9 @@ void loop() {
     // Click position 2 once
     Mouse.click(MOUSE_LEFT);
 
-    // Wait for 30 seconds, checking mouseActive periodically
+    // Wait for 20 seconds, checking mouseActive periodically
     unsigned long startWait = millis();
-    while (millis() - startWait < 30000) {
+    while (millis() - startWait < 20000) {
       if (!mouseActive) return;  // Early exit if deactivated
       delay(100);  // Check every 100ms during wait
     }
