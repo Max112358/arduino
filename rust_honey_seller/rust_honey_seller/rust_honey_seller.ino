@@ -15,13 +15,21 @@ volatile boolean mouseActive = false; // whether the sequence is active
 unsigned long lastDebounceTime = 0;  // for debouncing
 
 // Positions for the two click locations (relative to corner)
-//first button, increase sales count
+//first button, increase sales count for honey
 const int pos1X = -180;  // X offset from corner for first position
 const int pos1Y = -265;  // Y offset from corner for first position
 
 //second button, hit sell button
 const int pos2X = -100;  // X offset from corner for second position
 const int pos2Y = -50;   // Y offset from corner for second position
+
+//third button, increase sales count for fertilizer
+const int pos3X = 100;  // X offset 
+const int pos3Y = -100;   // Y offset
+
+//fourth button, hit sell button
+const int pos4X = -100;  // X offset
+const int pos4Y = -50;   // Y offset
 
 void setup() {
   // Initialize button pin as input with internal pull-up resistor
@@ -73,7 +81,7 @@ void moveMouseBy(int deltaX, int deltaY) {
 // Function to move cursor to bottom-right corner
 void moveToCorner() {
   // Make multiple large moves to ensure we hit the corner
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 100; i++) {
     if (!mouseActive) return;  // Check flag and exit if deactivated
 
     Mouse.move(127, 127, 0);
@@ -108,6 +116,28 @@ void loop() {
     if (!mouseActive) return;  // Early exit if deactivated
 
     // Click position 2 once
+    Mouse.click(MOUSE_LEFT);
+
+    delay(1000); //wait
+
+
+    // Move to position 3 (relative to position 1)
+    moveMouseBy(pos3X, pos3Y);
+    if (!mouseActive) return;  // Early exit if deactivated
+
+    // Click position 3 twenty-five times
+    for (int i = 0; i < 25; i++) {
+      if (!mouseActive) return;  // Early exit if deactivated
+
+      Mouse.click(MOUSE_LEFT);
+      delay(50);  // Short delay between clicks
+    }
+
+    // Move to position 4
+    moveMouseBy(pos4X, pos4Y);
+    if (!mouseActive) return;  // Early exit if deactivated
+
+    // Click position 4 once
     Mouse.click(MOUSE_LEFT);
 
     // Wait for 20 seconds, checking mouseActive periodically
